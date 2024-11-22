@@ -1,9 +1,26 @@
-import example.pepita
+import example.*
 
-describe "group of tests for pepita" {
+describe "Test para el item 6" {
+  const furia = new Furia(palabrotas = ["pucha", "miercoles", "peloduro"])
+  const alegria = new Alegria(intensidad = 700)
+  const tristeza = new Tristeza(intensidad = 300, causa="empato francia")
 
-  test "pepita has initial energy" {
-    assert.equals(100, pepita.energy())
+  const emociones = [furia, alegria, tristeza]
+
+  const axel = new Persona(edad = 43, emociones = emociones)
+  const rose = new Persona(edad = 21, emociones = emociones)
+  const pipi = new Persona(edad = 10, emociones = emociones)
+
+  const grupo = new Grupo(personas = [axel, rose, pipi])
+
+  const evento = new Evento(
+    impacto = 300,
+    descripcion = "argentina gana el mundial"
+  )
+  
+  test "todas las personas del grupo estan por explotar antes de vivir el evento y despues del evento ya explotaron" {
+    assert.that(grupo.personas().all({ p => p.porExplotar() }))
+    grupo.vivirEvento(evento)
+    assert.that(grupo.personas().all({ p => !p.porExplotar() }))
   }
-
 }
